@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'home/home_screen.dart';
-import 'calendar/calendar_screen.dart';
+import '../features/calendar/presentation/calendar_screen.dart';
 import 'race/race_screen.dart';
 import 'drivers/drivers_screen.dart';
 import 'settings/settings_screen.dart';

@@ -1,3 +1,4 @@
+import '../models/api/race_model.dart';
 import '../services/f1_api_service.dart';
 
 class RaceRepository {
@@ -7,15 +8,14 @@ class RaceRepository {
     required this.api,
   });
 
-  Future<Map<String, dynamic>> currentSeason() {
-    return api.getCurrentSeason();
-  }
+  Future<List<RaceModel>> getRaces() async {
+    final data = await api.getCurrentSeason();
 
-  Future<Map<String, dynamic>> driverStandings() {
-    return api.getDriverStandings();
-  }
+    final races =
+        data["MRData"]["RaceTable"]["Races"] as List;
 
-  Future<Map<String, dynamic>> constructorStandings() {
-    return api.getConstructorStandings();
+    return races
+        .map((e) => RaceModel.fromJson(e))
+        .toList();
   }
 }
