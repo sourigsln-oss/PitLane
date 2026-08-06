@@ -12,10 +12,12 @@ class RaceRepository {
     final data = await api.getCurrentSeason();
 
     final races =
-        data["MRData"]["RaceTable"]["Races"] as List;
+        data["MRData"]["RaceTable"]["Races"] as List<dynamic>;
 
     return races
-        .map((e) => RaceModel.fromJson(e))
+        .map((e) => RaceModel.fromJson(
+              e as Map<String, dynamic>,
+            ))
         .toList();
   }
 }

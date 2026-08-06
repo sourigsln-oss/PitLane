@@ -1,82 +1,59 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../data/repositories/race_repository.dart';
-import '../../../data/services/f1_api_service.dart';
-import '../../../data/models/api/race_model.dart';
+import '../../../data/providers/race_provider.dart';
 
-class CalendarScreen extends StatefulWidget {
+class CalendarScreen extends ConsumerWidget {
   const CalendarScreen({super.key});
 
   @override
-  State<CalendarScreen> createState() =>
-      _CalendarScreenState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    final races = ref.watch(racesProvider);
 
-class _CalendarScreenState
-    extends State<CalendarScreen> {
-
-  late Future<List<RaceModel>> races;
-
-  @override
-  void initState() {
-    super.initState();
-
-    races = RaceRepository(
-      api: F1ApiService(),
-    ).getRaces();
-  }
-
-  @override
-  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("2026 Calendar"),
+        title: const Text("2026 Race Calendar"),
       ),
 
-      body: FutureBuilder<List<RaceModel>>(
-        future: races,
-
-        builder: (context, snapshot) {
-
-          if (snapshot.connectionState ==
-              ConnectionState.waiting) {
-            return const Center(
+      body: races.when(
+        loading: () =>
+            const Center(
               child: CircularProgressIndicator(),
-            );
-          }
+            ),
 
-          if (snapshot.hasError) {
-            return Center(
-              child: Text(snapshot.error.toString()),
-            );
-          }
+        error: (error, stack) =>
+            Center(
+              child: Text(error.toString()),
+            ),
 
-          final data = snapshot.data!;
-
-          return ListView.builder(
-            itemCount: data.length,
-
-            itemBuilder: (_, index) {
-
-              final race = data[index];
-
-              return Card(
-                child: ListTile(
-
-                  title: Text(
-                    race.raceName,
-                  ),
-
-                  subtitle: Text(
-                    "${race.Circuit.Location.locality}, ${race.Circuit.Location.country}",
-                  ),
-
-                  trailing: Text(
-                    race.date,
-                  ),
-                ),
-              );
+        data: (raceList) {
+          return RefreshIndicator(
+            onRefresh: () async {
+              ref.invalidate(racesProvider);
+              await ref.read(racesProvider.future);
             },
+
+            child: ListView.builder(
+              itemCount: raceList.length,
+
+              itemBuilder: (context, index) {
+                final race = raceList[index];
+
+                return Card(
+                  margin: const EdgeInsets.all(10),
+
+                  child: ListTile(
+                    title: Text(race.raceName),
+
+                    subtitle: Text(
+                      "${race.circuit.location.locality}, ${race.circuit.location.country}",
+                    ),
+
+                    trailing: Text(race.date),
+                  ),
+                );
+              },
+            ),
           );
         },
       ),

@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../models/api/race_model.dart';
 import '../repositories/race_repository.dart';
 import '../services/f1_api_service.dart';
 
@@ -11,4 +12,9 @@ final raceRepositoryProvider = Provider<RaceRepository>((ref) {
   return RaceRepository(
     api: ref.read(apiProvider),
   );
+});
+
+final racesProvider =
+    FutureProvider<List<RaceModel>>((ref) async {
+  return ref.read(raceRepositoryProvider).getRaces();
 });

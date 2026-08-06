@@ -11,21 +11,18 @@ class F1ApiService {
 
   Future<Map<String, dynamic>> getCurrentSeason() async {
     final response = await _dio.get('/current.json');
-
     return response.data;
   }
 
   Future<Map<String, dynamic>> getDriverStandings() async {
     final response =
         await _dio.get('/current/driverStandings.json');
-
     return response.data;
   }
 
   Future<Map<String, dynamic>> getConstructorStandings() async {
     final response =
         await _dio.get('/current/constructorStandings.json');
-
     return response.data;
   }
 }
