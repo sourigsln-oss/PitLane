@@ -1,59 +1,21 @@
-import '../models/race.dart';
+import '../services/f1_api_service.dart';
 
-final List<Race> raceData = [
-  Race(
-    grandPrix: "Australian Grand Prix",
-    country: "🇦🇺",
-    circuit: "Albert Park",
-    location: "Melbourne, Australia",
-    image: "assets/images/circuits/albert_park.png",
-    trackLength: 5.278,
-    laps: 58,
-    turns: 14,
-    raceDate: DateTime(2026, 3, 8, 15, 0),
-    finished: true,
-    nextRace: false,
-  ),
+class RaceRepository {
+  final F1ApiService api;
 
-  Race(
-    grandPrix: "Japanese Grand Prix",
-    country: "🇯🇵",
-    circuit: "Suzuka",
-    location: "Suzuka, Japan",
-    image: "assets/images/circuits/suzuka.png",
-    trackLength: 5.807,
-    laps: 53,
-    turns: 18,
-    raceDate: DateTime(2026, 3, 29, 14, 0),
-    finished: true,
-    nextRace: false,
-  ),
+  RaceRepository({
+    required this.api,
+  });
 
-  Race(
-    grandPrix: "Italian Grand Prix",
-    country: "🇮🇹",
-    circuit: "Monza",
-    location: "Monza, Italy",
-    image: "assets/images/circuits/monza.png",
-    trackLength: 5.793,
-    laps: 53,
-    turns: 11,
-    raceDate: DateTime(2026, 9, 6, 15, 0),
-    finished: false,
-    nextRace: true,
-  ),
+  Future<Map<String, dynamic>> currentSeason() {
+    return api.getCurrentSeason();
+  }
 
-  Race(
-    grandPrix: "Singapore Grand Prix",
-    country: "🇸🇬",
-    circuit: "Marina Bay",
-    location: "Singapore",
-    image: "assets/images/circuits/marina_bay.png",
-    trackLength: 4.940,
-    laps: 62,
-    turns: 19,
-    raceDate: DateTime(2026, 10, 11, 20, 0),
-    finished: false,
-    nextRace: false,
-  ),
-];
+  Future<Map<String, dynamic>> driverStandings() {
+    return api.getDriverStandings();
+  }
+
+  Future<Map<String, dynamic>> constructorStandings() {
+    return api.getConstructorStandings();
+  }
+}

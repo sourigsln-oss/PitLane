@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import '../../widgets/timeline/race_weekend_timeline.dart';
+
 import '../../models/race.dart';
 import '../../widgets/countdown/race_countdown.dart';
+import '../../widgets/timeline/race_weekend_timeline.dart';
 
 class RaceDetailsScreen extends StatelessWidget {
   final Race race;
@@ -15,17 +16,14 @@ class RaceDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFF101010),
-
       appBar: AppBar(
         title: Text(race.grandPrix),
         backgroundColor: Colors.black,
       ),
-
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-
             Image.asset(
               race.image,
               height: 250,
@@ -35,11 +33,9 @@ class RaceDetailsScreen extends StatelessWidget {
 
             Padding(
               padding: const EdgeInsets.all(20),
-
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-
                   Text(
                     "${race.country} ${race.grandPrix}",
                     style: const TextStyle(
@@ -95,6 +91,21 @@ class RaceDetailsScreen extends StatelessWidget {
                     title: "Race Laps",
                     value: race.laps.toString(),
                   ),
+
+                  const SizedBox(height: 30),
+
+                  const Text(
+                    "Weekend Timeline",
+                    style: TextStyle(
+                      color: Colors.red,
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+
+                  const SizedBox(height: 20),
+
+                  const RaceWeekendTimeline(),
                 ],
               ),
             ),
@@ -123,10 +134,15 @@ class InfoTile extends StatelessWidget {
       color: const Color(0xFF1E1E1E),
       margin: const EdgeInsets.only(bottom: 12),
       child: ListTile(
-        leading: Icon(icon, color: Colors.red),
+        leading: Icon(
+          icon,
+          color: Colors.red,
+        ),
         title: Text(
           title,
-          style: const TextStyle(color: Colors.white),
+          style: const TextStyle(
+            color: Colors.white,
+          ),
         ),
         trailing: Text(
           value,

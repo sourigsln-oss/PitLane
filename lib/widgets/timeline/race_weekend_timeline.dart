@@ -54,7 +54,7 @@ class _RaceWeekendTimelineState
           Expanded(
             child: AnimatedBuilder(
               animation: controller,
-              builder: (_, __) {
+              builder: (context,child ) {
 
                 return Stack(
                   children: [
