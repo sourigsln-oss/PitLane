@@ -1,22 +1,44 @@
 import 'package:flutter/material.dart';
+import '../home/home_screen.dart';
+import 'widgets/animated_logo.dart';
 
-class SplashScreen extends StatelessWidget {
+class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
+
+  @override
+  State<SplashScreen> createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
+
+  @override
+  void initState() {
+    super.initState();
+
+    Future.delayed(
+      const Duration(seconds: 3),
+      () {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (_) => const HomeScreen(),
+          ),
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
+
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: const [
 
-            Icon(
-              Icons.sports_motorsports,
-              size: 120,
-              color: Colors.red,
-            ),
+            AnimatedLogo(),
 
             SizedBox(height: 25),
 
@@ -29,15 +51,14 @@ class SplashScreen extends StatelessWidget {
               ),
             ),
 
-            SizedBox(height: 12),
+            SizedBox(height: 10),
 
             Text(
-              "Your Formula Racing Companion",
+              "Loading Formula Racing...",
               style: TextStyle(
                 color: Colors.white70,
-                fontSize: 18,
               ),
-            )
+            ),
           ],
         ),
       ),
