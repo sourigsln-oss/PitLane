@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../home/home_screen.dart';
+import '../main_screen.dart';
 import 'widgets/animated_logo.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -21,7 +21,7 @@ class _SplashScreenState extends State<SplashScreen> {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (_) => const HomeScreen(),
+            builder: (_) => const MainScreen(),
           ),
         );
       },
