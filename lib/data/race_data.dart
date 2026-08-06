@@ -1,44 +1,59 @@
 import '../models/race.dart';
 
-const List<Race> raceData = [
-
+final List<Race> raceData = [
   Race(
     grandPrix: "Australian Grand Prix",
-    circuit: "Albert Park",
-    date: "15 Mar 2026",
     country: "🇦🇺",
+    circuit: "Albert Park",
+    location: "Melbourne, Australia",
+    image: "assets/images/circuits/albert_park.png",
+    trackLength: 5.278,
+    laps: 58,
+    turns: 14,
+    raceDate: DateTime(2026, 3, 8, 15, 0),
     finished: true,
     nextRace: false,
-    image: "assets/images/circuits/albert_park.png",
   ),
 
   Race(
     grandPrix: "Japanese Grand Prix",
-    circuit: "Suzuka",
-    date: "29 Mar 2026",
     country: "🇯🇵",
+    circuit: "Suzuka",
+    location: "Suzuka, Japan",
+    image: "assets/images/circuits/suzuka.png",
+    trackLength: 5.807,
+    laps: 53,
+    turns: 18,
+    raceDate: DateTime(2026, 3, 29, 14, 0),
     finished: true,
     nextRace: false,
-    image: "assets/images/circuits/suzuka.png",
   ),
 
   Race(
     grandPrix: "Italian Grand Prix",
-    circuit: "Monza",
-    date: "6 Sept 2026",
     country: "🇮🇹",
+    circuit: "Monza",
+    location: "Monza, Italy",
+    image: "assets/images/circuits/monza.png",
+    trackLength: 5.793,
+    laps: 53,
+    turns: 11,
+    raceDate: DateTime(2026, 9, 6, 15, 0),
     finished: false,
     nextRace: true,
-    image: "assets/images/circuits/monza.png",
   ),
 
   Race(
     grandPrix: "Singapore Grand Prix",
-    circuit: "Marina Bay",
-    date: "20 Sept 2026",
     country: "🇸🇬",
+    circuit: "Marina Bay",
+    location: "Singapore",
+    image: "assets/images/circuits/marina_bay.png",
+    trackLength: 4.940,
+    laps: 62,
+    turns: 19,
+    raceDate: DateTime(2026, 10, 11, 20, 0),
     finished: false,
     nextRace: false,
-    image: "assets/images/circuits/marina_bay.png",
   ),
 ];
